@@ -1,0 +1,41 @@
+function one(){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log("first");
+            resolve();
+        },3000)
+    })
+}
+function two(){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            reject("Error!");
+            console.log("second");
+        },2000)
+    })
+}
+function three(){
+    return new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            console.log("third");
+            resolve();
+        },1000)
+    })
+}
+async function call(){
+    try{
+        await one();
+        await two();
+        await three();
+        console.log("hello");
+    }
+    catch(err){
+         console.log(err);
+         throw new Error();
+    }
+}
+call().then(()=>{
+    console.log("All set");
+}).catch((err)=>{
+    console.log(err,"This is error")
+});
